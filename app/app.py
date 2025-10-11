@@ -13,16 +13,16 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     """
-    Función principal que maneja la calculadora.
-    GET: muestra el formulario.
-    POST: recibe datos del formulario, realiza la operación seleccionada.
+    Función principal de la aplicación.
+    Maneja las solicitudes GET para mostrar el formulario y POST
+    para procesar las operaciones de la calculadora.
     """
     resultado = None
     if request.method == "POST":
         try:
-            num1 = float(request.form.get("num1", 0))
-            num2 = float(request.form.get("num2", 0))
-            operacion = request.form.get("operacion", "")
+            num1 = float(request.form["num1"])
+            num2 = float(request.form["num2"])
+            operacion = request.form["operacion"]
 
             if operacion == "sumar":
                 resultado = sumar(num1, num2)
@@ -35,9 +35,9 @@ def index():
             else:
                 resultado = "Operación no válida"
         except ValueError:
-            resultado = "Debes ingresar números válidos"
+            resultado = "Error: Introduce números válidos"
         except ZeroDivisionError:
-            resultado = "No se puede dividir entre cero"
+            resultado = "Error: No se puede dividir por cero"
 
     return render_template("index.html", resultado=resultado)
 
