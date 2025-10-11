@@ -3,6 +3,7 @@ Aplicación Flask que actúa como calculadora básica.
 Recibe datos desde un formulario HTML y realiza operaciones matemáticas
 como sumar, restar, multiplicar y dividir.
 """
+
 from flask import Flask, render_template, request
 from .calculadora import sumar, restar, multiplicar, dividir
 
