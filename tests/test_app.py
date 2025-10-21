@@ -48,6 +48,24 @@ def test_index_post_invalid_numbers(client):
     assert response.status_code == 200
     assert b'Error: Introduce n\xc3\xbameros v\xc3\xa1lidos' in response.data
 
+def test_index_post_potencia(client):
+    """Verifica la operación de potencia (a^b)."""
+    response = client.post('/', data={'num1': '2', 'num2': '3', 'operacion': 'potencia'})
+    assert response.status_code == 200
+    assert b'8.0' in response.data
+
+def test_index_post_modulo(client):
+    """Verifica la operación de módulo (a % b)."""
+    response = client.post('/', data={'num1': '10', 'num2': '3', 'operacion': 'modulo'})
+    assert response.status_code == 200
+    assert b'1.0' in response.data
+
+def test_index_post_modulo_by_zero(client):
+    """Verifica el manejo de error al hacer módulo con divisor 0."""
+    response = client.post('/', data={'num1': '10', 'num2': '0', 'operacion': 'modulo'})
+    assert response.status_code == 200
+    assert b'Error: No se puede dividir por cero' in response.data
+
 def test_health_endpoint_ok(client):
     """Verifica que el endpoint /health responda correctamente."""
     resp = client.get("/health")

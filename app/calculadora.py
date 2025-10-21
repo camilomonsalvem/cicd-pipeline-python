@@ -63,3 +63,36 @@ def dividir(a, b):
     if b == 0:
         raise ZeroDivisionError("No se puede dividir por cero")
     return a / b
+
+
+def potencia(a, b):
+    """
+    Calcula la potencia de un número elevado a otro.
+
+    Args:
+        a (float | int): Base.
+        b (float | int): Exponente.
+
+    Returns:
+        float | int: Resultado de elevar a a la potencia b.
+    """
+    return a**b
+
+
+def modulo(a, b):
+    """
+    Calcula el residuo de la división entre dos números.
+
+    Args:
+        a (float | int): Dividendo.
+        b (float | int): Divisor (no puede ser cero).
+
+    Raises:
+        ZeroDivisionError: Si el divisor es cero.
+
+    Returns:
+        float | int: Residuo de la división de a entre b.
+    """
+    if b == 0:
+        raise ZeroDivisionError("No se puede calcular el módulo con divisor cero")
+    return a % b
