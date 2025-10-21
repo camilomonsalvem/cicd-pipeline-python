@@ -4,6 +4,7 @@ Recibe datos desde un formulario HTML y realiza operaciones matemáticas
 como sumar, restar, multiplicar y dividir.
 """
 
+import os
 from flask import Flask, render_template, request
 from .calculadora import sumar, restar, multiplicar, dividir
 
@@ -42,5 +43,12 @@ def index():
     return render_template("index.html", resultado=resultado)
 
 
+@app.route("/health")
+def health():
+    """Endpoint de verificación de salud para el ALB."""
+    return "OK", 200
+
+
 if __name__ == "__main__":  # pragma: no cover
-    app.run(port=5000, host="0.0.0.0")
+    app_port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=app_port, debug=False)
